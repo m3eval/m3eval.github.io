@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="Interpolation start placeholder">
+  <rect width="960" height="720" fill="#f3f3f3"/>
+  <rect x="40" y="40" width="880" height="640" rx="28" fill="#ffffff" stroke="#bbbbbb" stroke-width="4"/>
+  <text x="480" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" font-weight="700" fill="#111111">Start Placeholder</text>
+  <text x="480" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" fill="#555555">Task layout / sample frame</text>
+  <text x="480" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#777777">Replace with a real M3Eval task image</text>
+</svg>

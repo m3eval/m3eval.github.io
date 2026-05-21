@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="description"
+    content="M3Eval is a benchmark for probing memory in multimodal models through cognitively grounded video tasks."
+  >
+  <meta name="keywords" content="M3Eval, Video Memory, Multimodal Models, Benchmark">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M3Eval: Multi-Modal Memory Evaluation through Cognitively-Grounded Video Tasks</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+  >
+  <link rel="stylesheet" href="./static/css/index.css?v=20260519f">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/index.js?v=20260519f"></script>
+</head>
+<body>
+
+<nav class="navbar site-navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item nav-title" href="#top">M<sup>3</sup>Eval</a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="site-nav">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="site-nav" class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="#overview">Overview</a>
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#tasks">Tasks</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+      <a class="navbar-item" href="https://github.com/PKU-VaLuE-Lab/m3eval">Code</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero publication-hero" id="top">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">M<sup>3</sup>Eval: Multi-Modal Memory Evaluation through Cognitively-Grounded Video Tasks</h1>
+
+          <div class="publication-authors author-list">
+            <span class="author-block">Jie Huang<sup>1,*</sup></span>
+            <span class="author-block">Ruixun Liu<sup>1,*</sup></span>
+            <span class="author-block">Sirui Sun<sup>1</sup></span>
+            <span class="author-block">Xinyi Yang<sup>1</sup></span>
+            <span class="author-block">Yin Li<sup>2</sup></span>
+            <span class="author-block">Yixin Zhu<sup>1</sup></span>
+            <span class="author-block">Yiwu Zhong<sup>1,&dagger;</sup></span>
+          </div>
+
+          <div class="publication-authors affiliation-list">
+            <span class="author-block"><sup>1</sup>Peking University</span>
+            <span class="author-block"><sup>2</sup>University of Wisconsin-Madison</span>
+          </div>
+
+          <div class="author-notes">
+            <span>* Equal contribution.</span>
+            <span>&dagger; Corresponding author.</span>
+          </div>
+
+          <div class="publication-links">
+            <span class="link-block">
+              <a href="#" class="external-link button is-normal is-dark is-disabled" aria-disabled="true">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="#tasks" class="external-link button is-normal is-dark">
+                <span class="icon"><i class="fas fa-play"></i></span>
+                <span>Demos</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://github.com/PKU-VaLuE-Lab/m3eval" class="external-link button is-normal is-dark">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+            </span>
+            <span class="link-block">
+              <a href="https://huggingface.co/datasets/PKU-VaLuE-Lab/m3eval" class="external-link button is-normal is-dark">
+                <span class="icon"><i class="far fa-images"></i></span>
+                <span>Data</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="section overview-section" id="overview">
+    <div class="container is-max-desktop">
+      <figure class="figure-panel overview-figure">
+        <img src="./static/images/paper/main-final.png" alt="M3Eval benchmark overview figure">
+        <figcaption>
+          <strong>TL;DR:</strong> M<sup>3</sup>Eval systematically evaluates multiple dimensions of multi-modal memory through video tasks grounded in cognitive psychology, offering new insights into the limitations of current multi-modal memory and informing the design of future systems.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="abstract">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">Abstract</h2>
+      <div class="content abstract-content">
+        <p>As multi-modal models advance towards long-form video understanding, memory emerges as a critical capability. Despite substantial effort in developing video datasets and benchmarks, existing work primarily focuses on perception and reasoning, without systematically evaluating memory: what models retain, how faithfully information is preserved, and how robust memory remains under interference.</p>
+        <p>To address this gap, we introduce M<sup>3</sup>Eval, the first comprehensive evaluation framework and benchmark for probing different memory dimensions in multi-modal models. Grounded in cognitive psychology, our design features carefully constructed tasks isolating key aspects of memory. Leveraging M<sup>3</sup>Eval, we conduct extensive experiments across representative multi-modal models, revealing consistent weaknesses and distinctive behaviors.</p>
+        <p>We find that models struggle to maintain disentangled representations when processing parallel video streams, exhibit interference patterns differing substantially from those observed in human memory, ground memory sources more reliably in the spatial domain than the temporal domain, and demonstrate limited symbolic memory. Collectively, our benchmark provides a valuable resource for future research, whereas our findings highlight memory as a fundamental yet underexplored capability and offer insights for designing more effective memory mechanisms in multi-modal models.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section task-section" id="tasks">
+    <div class="container is-max-widescreen">
+      <div class="section-heading">
+        <h2 class="title is-3 section-title">Video Memory Tasks</h2>
+        <p class="task-section-note">For each task, the left shows how the task is constructed; the right is a short demo video for illustration only, not drawn from the dataset. Click "detailed examples" below for more real samples with full QA.</p>
+      </div>
+
+      <article class="task-block">
+        <div class="task-header">
+          <p class="task-kicker">Task 1</p>
+          <h3 class="title is-4">Divided Attention <span class="task-subtitle">encoding concurrent information</span></h3>
+        </div>
+        <div class="task-media-pair">
+          <figure class="media-card figure-card">
+            <img src="./static/images/tasks/divided-attention-task-figure-alt2.png" alt="Divided Attention task figure">
+          </figure>
+          <figure class="media-card video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source src="./static/videos/demos/divided-attention-demo.mp4" type="video/mp4">
+            </video>
+          </figure>
+        </div>
+        <p class="media-caption">This video displays two separate videos side by side, with Video 1 on the left and Video 2 on the right throughout.</p>
+        <details class="detail-example">
+          <summary class="detail-toggle">
+            <span class="detail-arrow" aria-hidden="true">&#9656;</span>
+            <span>detailed examples</span>
+          </summary>
+          <div class="detail-carousel" data-detail-carousel>
+            <figure class="detail-example-figure detail-slide">
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/divided-attention-example1.png" alt="Divided Attention example targeting Source Identification">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Divided Attention targeting Source Identification. The three distractors replace certain content in the target video's narrative with content from the distractor video, while the correct option (highlighted in yellow) faithfully describes only the target video.</figcaption>
+            </figure>
+            <figure class="detail-example-figure detail-slide" hidden>
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/divided-attention-example2.png" alt="Divided Attention example targeting Order Understanding">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Divided Attention targeting Order Understanding. The three distractors swap the temporal or logical sequence of events in the target video's narrative, while the correct option (highlighted in yellow) preserves the original order.</figcaption>
+            </figure>
+            <figure class="detail-example-figure detail-slide" hidden>
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/divided-attention-example3.png" alt="Divided Attention example targeting Content Retention">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Divided Attention targeting Content Retention. The three distractors replace certain content in the target video's narrative with plausible but fabricated content, while the correct option (highlighted in yellow) faithfully describes only the target video.</figcaption>
+            </figure>
+            <div class="detail-carousel-controls" aria-label="Divided Attention example navigation">
+              <button type="button" class="detail-nav-button" data-direction="prev" aria-label="Show previous Divided Attention example">&#9664;</button>
+              <button type="button" class="detail-nav-button" data-direction="next" aria-label="Show next Divided Attention example">&#9654;</button>
+            </div>
+            <div class="detail-carousel-status" aria-live="polite"></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="task-block">
+        <div class="task-header">
+          <p class="task-kicker">Task 2</p>
+          <h3 class="title is-4">Memory Interference <span class="task-subtitle">robustness to distraction</span></h3>
+        </div>
+        <div class="task-media-pair">
+          <figure class="media-card figure-card">
+            <img src="./static/images/tasks/memory-interference.png" alt="Memory Interference task figure">
+          </figure>
+          <figure class="media-card video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source src="./static/videos/demos/memory-interference-demo.mp4" type="video/mp4">
+            </video>
+          </figure>
+        </div>
+        <p class="media-caption">This video contains two separate videos played sequentially: Video 1 is played first, followed by Video 2.</p>
+        <details class="detail-example">
+          <summary class="detail-toggle">
+            <span class="detail-arrow" aria-hidden="true">&#9656;</span>
+            <span>detailed examples</span>
+          </summary>
+          <div class="detail-carousel" data-detail-carousel>
+            <figure class="detail-example-figure detail-slide">
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/memory-interference-example1.png" alt="Memory Interference example">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Memory Interference. Each question comprises the correct answer (highlighted in yellow) for the target video, two intrusion options drawn from the interfering video, and one unrelated distractor.</figcaption>
+            </figure>
+          </div>
+        </details>
+      </article>
+
+      <article class="task-block">
+        <div class="task-header">
+          <p class="task-kicker">Task 3</p>
+          <h3 class="title is-4">Interleaved Events <span class="task-subtitle">temporal organization</span></h3>
+        </div>
+        <div class="task-media-pair">
+          <figure class="media-card figure-card">
+            <img src="./static/images/tasks/interleaved-events.png" alt="Interleaved Events task figure">
+          </figure>
+          <figure class="media-card video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source src="./static/videos/demos/interleaved-events-demo.mp4" type="video/mp4">
+            </video>
+          </figure>
+        </div>
+        <p class="media-caption">This video interleaves two separate videos. Each is divided into <em>N</em> equal-duration segments and alternately concatenated (A<sub>1</sub>, B<sub>1</sub>, A<sub>2</sub>, B<sub>2</sub>, ..., A<sub>n</sub>, B<sub>n</sub>).</p>
+        <details class="detail-example">
+          <summary class="detail-toggle">
+            <span class="detail-arrow" aria-hidden="true">&#9656;</span>
+            <span>detailed examples</span>
+          </summary>
+          <div class="detail-carousel" data-detail-carousel>
+            <figure class="detail-example-figure detail-slide">
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/interleaved-events-example1.png" alt="Interleaved Events example targeting Source Identification">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Interleaved Events targeting Source Identification. The three distractors replace certain content in the target video's narrative with content from the distractor video, while the correct option (highlighted in yellow) faithfully describes only the target video.</figcaption>
+            </figure>
+            <figure class="detail-example-figure detail-slide" hidden>
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/interleaved-events-example2.png" alt="Interleaved Events example targeting Order Understanding">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Interleaved Events targeting Order Understanding. The three distractors swap the temporal or logical sequence of events in the target video's narrative, while the correct option (highlighted in yellow) preserves the original order.</figcaption>
+            </figure>
+            <figure class="detail-example-figure detail-slide" hidden>
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/interleaved-events-example3.png" alt="Interleaved Events example targeting Content Retention">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Interleaved Events targeting Content Retention. The three distractors replace certain content in the target video's narrative with plausible but fabricated content, while the correct option (highlighted in yellow) faithfully describes only the target video.</figcaption>
+            </figure>
+            <figure class="detail-example-figure detail-slide" hidden>
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/interleaved-events-example4.png" alt="Interleaved Events example targeting False Memory Discrimination">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of Interleaved Events targeting False Memory Discrimination. A fabricated plot element related to both videos is presented, and the model must correctly identify that it belongs to neither video. The correct answer is highlighted in yellow.</figcaption>
+            </figure>
+            <div class="detail-carousel-controls" aria-label="Interleaved Events example navigation">
+              <button type="button" class="detail-nav-button" data-direction="prev" aria-label="Show previous Interleaved Events example">&#9664;</button>
+              <button type="button" class="detail-nav-button" data-direction="next" aria-label="Show next Interleaved Events example">&#9654;</button>
+            </div>
+            <div class="detail-carousel-status" aria-live="polite"></div>
+          </div>
+        </details>
+      </article>
+
+      <article class="task-block">
+        <div class="task-header">
+          <p class="task-kicker">Task 4</p>
+          <h3 class="title is-4">N-Back <span class="task-subtitle">symbol grounding and memory capacity</span></h3>
+        </div>
+        <div class="task-media-pair">
+          <figure class="media-card figure-card">
+            <img src="./static/images/tasks/n-back.png" alt="N-Back task figure">
+          </figure>
+          <figure class="media-card video-card">
+            <video controls muted loop playsinline preload="metadata">
+              <source src="./static/videos/demos/n-back-demo.mp4" type="video/mp4">
+            </video>
+          </figure>
+        </div>
+        <p class="media-caption">This video presents a sequence of <em>K</em> clips. The task is to judge whether the last clip matches the clip <em>N</em> positions back in the same symbolic attribute (e.g., scene).</p>
+        <details class="detail-example">
+          <summary class="detail-toggle">
+            <span class="detail-arrow" aria-hidden="true">&#9656;</span>
+            <span>detailed examples</span>
+          </summary>
+          <div class="detail-carousel" data-detail-carousel>
+            <figure class="detail-example-figure detail-slide">
+              <div class="detail-slide-stage">
+                <div class="detail-image-frame">
+                  <img src="./static/images/tasks/n-back-example1.png" alt="N-Back example">
+                </div>
+              </div>
+              <figcaption class="media-caption">Example of N-Back. The model is asked to judge whether the final clip matches the clip N positions earlier with a Yes/No answer, on two attributes: Scene (same environment category) and Action (same type of activity). The correct answer is highlighted in yellow.</figcaption>
+            </figure>
+          </div>
+        </details>
+      </article>
+    </div>
+  </section>
+
+  <section class="section results-section" id="results">
+    <div class="container is-max-widescreen">
+      <div class="section-heading">
+        <h2 class="title is-3 section-title">Detailed Experimental Results</h2>
+        <p class="result-section-note">For each task, "Main Result" presents the primary results; "Further Experiment" provides deeper analysis; and the final "Finding" summarizes the key takeaway.</p>
+      </div>
+
+      <div class="results-grid">
+        <section class="result-panel result-panel-wide">
+          <div class="task-header result-header">
+            <p class="task-kicker">Task 1</p>
+            <h3 class="title is-4">Divided Attention</h3>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Main Result</h4>
+            <p class="result-caption">Accuracy (%) on three divided attention metrics under the split-screen setting without swaps and with frequent swaps of the two videos' left/right positions.</p>
+            <div class="table-wrap">
+              <table class="table is-fullwidth is-hoverable result-table table-da-full">
+                <colgroup>
+                  <col class="model-col">
+                  <col class="metric-col"><col class="metric-col"><col class="metric-col">
+                  <col class="metric-col"><col class="metric-col"><col class="metric-col">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th rowspan="2">Acc. (%)</th>
+                    <th colspan="3">No swapping</th>
+                    <th colspan="3">Swapping</th>
+                  </tr>
+                  <tr>
+                    <th>Source<br>Identification</th>
+                    <th>Order<br>Understanding</th>
+                    <th>Content<br>Retention</th>
+                    <th>Source<br>Identification</th>
+                    <th>Order<br>Understanding</th>
+                    <th>Content<br>Retention</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Human</td><td>89.58</td><td>90.00</td><td>92.16</td><td><span class="main-value">81.25</span> <span class="delta delta-negative">(-8.33)</span></td><td><span class="main-value">85.00</span> <span class="delta delta-negative">(-5.00)</span></td><td><span class="main-value">86.27</span> <span class="delta delta-negative">(-5.89)</span></td></tr>
+                  <tr><td>Random</td><td>25.00</td><td>25.00</td><td>25.00</td><td><span class="main-value">25.00</span> <span class="delta delta-neutral">(0.00)</span></td><td><span class="main-value">25.00</span> <span class="delta delta-neutral">(0.00)</span></td><td><span class="main-value">25.00</span> <span class="delta delta-neutral">(0.00)</span></td></tr>
+                  <tr class="table-group"><th colspan="7">Closed-Source Models</th></tr>
+                  <tr><td>Gemini-3.1-Pro-Preview</td><td>62.50</td><td>52.50</td><td>49.02</td><td><span class="main-value">37.50</span> <span class="delta delta-negative">(-25.00)</span></td><td><span class="main-value">52.50</span> <span class="delta delta-neutral">(0.00)</span></td><td><span class="main-value">56.86</span> <span class="delta delta-positive">(+7.84)</span></td></tr>
+                  <tr><td>GPT-5.4</td><td>27.08</td><td>35.00</td><td>47.06</td><td><span class="main-value">35.42</span> <span class="delta delta-positive">(+8.34)</span></td><td><span class="main-value">30.00</span> <span class="delta delta-negative">(-5.00)</span></td><td><span class="main-value">49.02</span> <span class="delta delta-positive">(+1.96)</span></td></tr>
+                  <tr class="table-group"><th colspan="7">Open-Source Agents</th></tr>
+                  <tr><td>VideoLucy</td><td>16.67</td><td>42.50</td><td>37.25</td><td><span class="main-value">14.58</span> <span class="delta delta-negative">(-2.09)</span></td><td><span class="main-value">25.00</span> <span class="delta delta-negative">(-17.50)</span></td><td><span class="main-value">39.22</span> <span class="delta delta-positive">(+1.97)</span></td></tr>
+                  <tr><td>M3-Agent</td><td>27.08</td><td>30.00</td><td>23.53</td><td><span class="main-value">31.25</span> <span class="delta delta-positive">(+4.17)</span></td><td><span class="main-value">35.00</span> <span class="delta delta-positive">(+5.00)</span></td><td><span class="main-value">23.53</span> <span class="delta delta-neutral">(0.00)</span></td></tr>
+                  <tr class="table-group"><th colspan="7">Open-Source Models</th></tr>
+                  <tr><td>Qwen3.5-4B</td><td>18.75</td><td>25.00</td><td>31.37</td><td><span class="main-value">14.58</span> <span class="delta delta-negative">(-4.17)</span></td><td><span class="main-value">22.50</span> <span class="delta delta-negative">(-2.50)</span></td><td><span class="main-value">33.33</span> <span class="delta delta-positive">(+1.96)</span></td></tr>
+                  <tr><td>Qwen3-VL-8B-Instruct</td><td>16.67</td><td>25.00</td><td>37.25</td><td><span class="main-value">12.50</span> <span class="delta delta-negative">(-4.17)</span></td><td><span class="main-value">30.00</span> <span class="delta delta-positive">(+5.00)</span></td><td><span class="main-value">35.29</span> <span class="delta delta-negative">(-1.96)</span></td></tr>
+                  <tr><td>InternVL3.5-8B</td><td>29.17</td><td>37.50</td><td>33.33</td><td><span class="main-value">25.00</span> <span class="delta delta-negative">(-4.17)</span></td><td><span class="main-value">40.00</span> <span class="delta delta-positive">(+2.50)</span></td><td><span class="main-value">27.45</span> <span class="delta delta-negative">(-5.88)</span></td></tr>
+                  <tr><td>Qwen3.5-9B</td><td>35.42</td><td>25.00</td><td>25.49</td><td><span class="main-value">18.75</span> <span class="delta delta-negative">(-16.67)</span></td><td><span class="main-value">30.00</span> <span class="delta delta-positive">(+5.00)</span></td><td><span class="main-value">13.73</span> <span class="delta delta-negative">(-11.76)</span></td></tr>
+                  <tr><td>Qwen3.5-27B</td><td>41.67</td><td>25.00</td><td>35.29</td><td><span class="main-value">27.08</span> <span class="delta delta-negative">(-14.59)</span></td><td><span class="main-value">32.50</span> <span class="delta delta-positive">(+7.50)</span></td><td><span class="main-value">35.29</span> <span class="delta delta-neutral">(0.00)</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Further Experiment</h4>
+            <figure class="figure-panel further-figure wide-figure">
+              <img src="./static/images/results/divided-attention-further.png" alt="Divided Attention further experiment">
+              <figcaption><strong>Attention shifts induced by split-screen interference.</strong> For each case, the left panel shows the single-video condition, whereas the right panel shows the split-screen condition. Under the split-screen setting, the model's attention is disrupted, resulting in erroneous responses.</figcaption>
+            </figure>
+          </div>
+          <div class="finding-box"><strong>Finding 1:</strong> Existing multi-modal models lack robust memory for parallel tasks, probably due to attention confusion across concurrent visual streams.</div>
+        </section>
+
+        <section class="result-panel result-panel-wide">
+          <div class="task-header result-header">
+            <p class="task-kicker">Task 2</p>
+            <h3 class="title is-4">Memory Interference</h3>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Main Result</h4>
+            <p class="result-caption">Proactive: the first video (V1) interferes with recall of the second video (V2); retroactive: the second video (V2) interferes with recall of the first video (V1). Delta denotes proactive minus retroactive.</p>
+            <div class="table-wrap">
+              <table class="table is-fullwidth is-hoverable result-table table-mi">
+                <colgroup>
+                  <col class="model-col">
+                  <col class="metric-col"><col class="metric-col"><col class="metric-col">
+                  <col class="metric-col"><col class="metric-col"><col class="metric-col">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th rowspan="2">Model</th>
+                    <th colspan="3">Accuracy (%)</th>
+                    <th colspan="3">Intrusion Rate (%)</th>
+                  </tr>
+                  <tr>
+                    <th>Proactive</th>
+                    <th>Retroactive</th>
+                    <th>Delta</th>
+                    <th>Proactive</th>
+                    <th>Retroactive</th>
+                    <th>Delta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Human</td><td>94.55</td><td>74.55</td><td>20.00</td><td>3.64</td><td>20.00</td><td>-16.36</td></tr>
+                  <tr><td>Random</td><td>25.00</td><td>25.00</td><td>0.00</td><td>50.00</td><td>50.00</td><td>0.00</td></tr>
+                  <tr class="table-group"><th colspan="7">Closed-Source Models</th></tr>
+                  <tr><td>Gemini-3.1-Pro-Preview</td><td>63.64</td><td>54.55</td><td>9.09</td><td>23.64</td><td>30.91</td><td>-7.27</td></tr>
+                  <tr><td>GPT-5.4</td><td>43.64</td><td>40.00</td><td>3.64</td><td>43.64</td><td>34.55</td><td>9.09</td></tr>
+                  <tr class="table-group"><th colspan="7">Open-Source Agents</th></tr>
+                  <tr><td>VideoLucy</td><td>29.09</td><td>43.64</td><td>-14.55</td><td>43.64</td><td>34.55</td><td>9.09</td></tr>
+                  <tr><td>M3-Agent</td><td>43.64</td><td>36.36</td><td>7.28</td><td>40.00</td><td>34.55</td><td>5.45</td></tr>
+                  <tr class="table-group"><th colspan="7">Open-Source Models</th></tr>
+                  <tr><td>Qwen3.5-4B</td><td>29.09</td><td>38.18</td><td>-9.09</td><td>45.45</td><td>38.18</td><td>7.27</td></tr>
+                  <tr><td>Qwen3-VL-8B-Instruct</td><td>25.45</td><td>29.09</td><td>-3.64</td><td>54.55</td><td>52.73</td><td>1.82</td></tr>
+                  <tr><td>InternVL3.5-8B</td><td>52.73</td><td>49.09</td><td>3.64</td><td>32.73</td><td>41.82</td><td>-9.09</td></tr>
+                  <tr><td>Qwen3.5-9B</td><td>29.09</td><td>38.18</td><td>-9.09</td><td>50.91</td><td>41.82</td><td>9.09</td></tr>
+                  <tr><td>Qwen3.5-27B</td><td>45.45</td><td>40.00</td><td>5.45</td><td>40.00</td><td>43.64</td><td>-3.64</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Further Experiment</h4>
+            <figure class="figure-panel further-figure compact-figure">
+              <img src="./static/images/results/memory-interference-further.png" alt="Memory Interference further experiment">
+              <figcaption><strong>Accuracy changes from video repetition.</strong> Repeating either the target or interfering video improves accuracy for most models, suggesting repetition as a promising way to enhance model memory.</figcaption>
+            </figure>
+          </div>
+          <div class="finding-box"><strong>Finding 2:</strong> Retroactive interference exceeds proactive interference in humans, whereas both occur comparably in multi-modal models. Further experiments surprisingly find that repeating target/interfering videos can both enhance performance during interference.</div>
+        </section>
+
+        <section class="result-panel result-panel-wide">
+          <div class="task-header result-header">
+            <p class="task-kicker">Task 3</p>
+            <h3 class="title is-4">Interleaved Events</h3>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Main Result</h4>
+            <p class="result-caption">Accuracy (%) on four interleaved reconstruction metrics.</p>
+            <div class="table-wrap">
+              <table class="table is-fullwidth is-hoverable result-table table-ie">
+                <colgroup>
+                  <col class="model-col">
+                  <col class="metric-col"><col class="metric-col"><col class="metric-col"><col class="metric-col">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Source Identification</th>
+                    <th>Order Understanding</th>
+                    <th>Content Retention</th>
+                    <th>False Memory Discrimination</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Human</td><td>75.95</td><td>80.00</td><td>83.64</td><td>82.11</td></tr>
+                  <tr><td>Random</td><td>25.00</td><td>25.00</td><td>25.00</td><td>25.00</td></tr>
+                  <tr class="table-group"><th colspan="5">Closed-Source Models</th></tr>
+                  <tr><td>Gemini-3.1-Pro-Preview</td><td>43.04</td><td>50.00</td><td>49.09</td><td>26.32</td></tr>
+                  <tr><td>GPT-5.4</td><td>43.04</td><td>40.00</td><td>47.27</td><td>7.37</td></tr>
+                  <tr class="table-group"><th colspan="5">Open-Source Agents</th></tr>
+                  <tr><td>VideoLucy</td><td>30.38</td><td>23.33</td><td>43.64</td><td>40.00</td></tr>
+                  <tr><td>M3-Agent</td><td>27.85</td><td>40.00</td><td>21.82</td><td>15.79</td></tr>
+                  <tr class="table-group"><th colspan="5">Open-Source Models</th></tr>
+                  <tr><td>Qwen3.5-4B</td><td>30.38</td><td>20.00</td><td>41.82</td><td>23.16</td></tr>
+                  <tr><td>Qwen3-VL-8B-Instruct</td><td>21.52</td><td>23.33</td><td>30.91</td><td>3.16</td></tr>
+                  <tr><td>InternVL3.5-8B</td><td>25.32</td><td>26.67</td><td>41.82</td><td>1.05</td></tr>
+                  <tr><td>Qwen3.5-9B</td><td>26.58</td><td>40.00</td><td>25.45</td><td>7.37</td></tr>
+                  <tr><td>Qwen3.5-27B</td><td>39.24</td><td>33.33</td><td>34.55</td><td>3.16</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Further Experiment</h4>
+            <figure class="figure-panel further-figure compact-figure">
+              <img src="./static/images/results/interleaved-events-further.png" alt="Interleaved Events further experiment">
+              <figcaption><strong>Accuracy of source grounding.</strong> Spatial source uses the split-screen format; temporal source uses the interleaved format. Models perform notably better on spatial than temporal source grounding.</figcaption>
+            </figure>
+          </div>
+          <div class="finding-box"><strong>Finding 3:</strong> Multi-modal memory is less capable than human memory of structuring temporally interleaved information. Further experiments show that memory source grounding is consistently stronger along the spatial dimension than along the temporal dimension.</div>
+        </section>
+
+        <section class="result-panel result-panel-wide">
+          <div class="task-header result-header">
+            <p class="task-kicker">Task 4</p>
+            <h3 class="title is-4">N-Back</h3>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Main Result</h4>
+            <figure class="figure-panel result-figure">
+              <img src="./static/images/results/n-back-results.png" alt="N-Back main results">
+              <figcaption><strong>Average accuracy on the N-Back task.</strong> Overall performance of each model and human under two symbolic attributes: scene and action, averaged over all K and N configurations.</figcaption>
+            </figure>
+          </div>
+          <div class="result-block">
+            <h4 class="result-block-title">Further Experiment</h4>
+            <figure class="figure-panel further-figure compact-figure">
+              <img src="./static/images/results/n-back-further.png" alt="N-Back further experiment">
+              <figcaption><strong>Effect of N and K on accuracy.</strong> Each video clip is abstracted as a symbol. Sample points from different models are shown with fitted curves and confidence intervals.</figcaption>
+            </figure>
+          </div>
+          <div class="finding-box"><strong>Finding 4:</strong> Multi-modal models lag far behind humans in symbolic memory tasks. Unlike humans, models show no decay over increasing temporal distance, yet degrade sharply with increasing number of symbols, revealing a fundamental inability to filter irrelevant memory.</div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3 section-title">BibTeX</h2>
+<pre><code>@article{m3eval2026,
+  title   = {M3Eval: Multi-Modal Memory Evaluation through Cognitively-Grounded Video Tasks},
+  author  = {Huang, Jie and Liu, Ruixun and Sun, Sirui and Yang, Xinyi and Li, Yin and Zhu, Yixin and Zhong, Yiwu},
+  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  year    = {2026},
+}</code></pre>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
+      <p>
+        Website source code based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies project page</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

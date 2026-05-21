@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="Interpolation frame 1">
+  <rect width="960" height="720" fill="#f5f5f5"/>
+  <rect x="60" y="70" width="840" height="580" rx="24" fill="#ffffff" stroke="#bbbbbb" stroke-width="4"/>
+  <text x="480" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#111111">Frame 1</text>
+  <text x="480" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#555555">Divided Attention</text>
+  <text x="480" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#777777">Placeholder slider frame</text>
+</svg>
