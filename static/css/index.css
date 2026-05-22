@@ -136,6 +136,12 @@ body {
   line-height: 1.6;
 }
 
+.task-section .task-section-note,
+.task-section .media-caption,
+.task-section .detail-toggle {
+  font-size: 0.98rem;
+}
+
 .result-section-note {
   margin: 0.65rem auto 0;
   max-width: 760px;
@@ -185,6 +191,10 @@ body {
   cursor: pointer;
   list-style: none;
   user-select: none;
+}
+
+.detail-toggle strong {
+  font-weight: 700;
 }
 
 .detail-toggle::-webkit-details-marker {
