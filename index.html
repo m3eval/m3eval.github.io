@@ -301,7 +301,7 @@
             </video>
           </figure>
         </div>
-        <p class="media-caption">This video presents a sequence of <em>K</em> clips. The task is to judge whether the last clip matches the clip <em>N</em> positions back in the same symbolic attribute (e.g., scene).</p>
+        <p class="media-caption">This video presents a sequence of <em>K</em> clips. The task is to decide whether the last clip matches the clip <em>N</em> positions back in the same symbolic attribute (e.g., scene).</p>
         <details class="detail-example">
           <summary class="detail-toggle">
             <span class="detail-arrow" aria-hidden="true">&#9656;</span>
@@ -314,7 +314,7 @@
                   <img src="./static/images/tasks/n-back-example1.png" alt="N-Back example">
                 </div>
               </div>
-              <figcaption class="media-caption">Example of N-Back. The model is asked to judge whether the final clip matches the clip N positions earlier with a Yes/No answer, on two attributes: Scene (same environment category) and Action (same type of activity). The correct answer is highlighted in yellow.</figcaption>
+              <figcaption class="media-caption">Example of N-Back. The model is asked to decide whether the final clip matches the clip N positions earlier with a Yes/No answer, on two attributes: Scene (same environment category) and Action (same type of activity). The correct answer is highlighted in yellow.</figcaption>
             </figure>
           </div>
         </details>
@@ -445,7 +445,7 @@
               <figcaption><strong>Accuracy changes from video repetition.</strong> Repeating either the target or interfering video improves accuracy for most models, suggesting repetition as a promising way to enhance model memory.</figcaption>
             </figure>
           </div>
-          <div class="finding-box"><strong>Finding 2:</strong> Retroactive interference exceeds proactive interference in humans, whereas both occur comparably in multi-modal models. Further experiments surprisingly find that repeating target/interfering videos can both enhance performance during interference.</div>
+          <div class="finding-box"><strong>Finding 2:</strong> Retroactive interference exceeds proactive interference in humans, whereas both occur comparably in multi-modal models. Further experiments surprisingly find that repeating target or interfering videos can both enhance the understanding of target video.</div>
         </section>
 
         <section class="result-panel result-panel-wide">
@@ -494,10 +494,10 @@
             <h4 class="result-block-title">Further Experiment</h4>
             <figure class="figure-panel further-figure compact-figure">
               <img src="./static/images/results/interleaved-events-further.png" alt="Interleaved Events further experiment">
-              <figcaption><strong>Accuracy of source grounding.</strong> Spatial source uses the split-screen format; temporal source uses the interleaved format. Models perform notably better on spatial than temporal source grounding.</figcaption>
+              <figcaption><strong>Accuracy of source grounding.</strong> Spatial source uses the split-screen format; temporal source uses the interleaved format.</figcaption>
             </figure>
           </div>
-          <div class="finding-box"><strong>Finding 3:</strong> Multi-modal memory is less capable than human memory of structuring temporally interleaved information. Further experiments show that memory source grounding is consistently stronger along the spatial dimension than along the temporal dimension.</div>
+          <div class="finding-box"><strong>Finding 3:</strong> Compared to human memory, multi-modal models are less capable of organizing temporally interleaved information. Further analysis reveals that memory source grounding along the spatial dimension is consistently stronger than along the temporal dimension.</div>
         </section>
 
         <section class="result-panel result-panel-wide">
@@ -519,7 +519,7 @@
               <figcaption><strong>Effect of N and K on accuracy.</strong> Each video clip is abstracted as a symbol. Sample points from different models are shown with fitted curves and confidence intervals.</figcaption>
             </figure>
           </div>
-          <div class="finding-box"><strong>Finding 4:</strong> Multi-modal models lag far behind humans in symbolic memory tasks. Unlike humans, models show no decay over increasing temporal distance, yet degrade sharply with increasing number of symbols, revealing a fundamental inability to filter irrelevant memory.</div>
+          <div class="finding-box"><strong>Finding 4:</strong> Multi-modal models lag far behind humans in symbolic memory. Unlike humans, models do not decay when increasing temporal gap (N), yet degrade largely with increasing number of total symbols (K), revealing a fundamental inability to filter irrelevant memory.</div>
         </section>
       </div>
     </div>
